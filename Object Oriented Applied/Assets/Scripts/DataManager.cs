@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine.UI;
 
 public class DataManager : MonoBehaviour
 {
@@ -11,18 +12,29 @@ public class DataManager : MonoBehaviour
     public string PlayerName;
     public float VolumeSetting;
     public float BestTimeLasted;
+    public int GameDifficulty;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
-    { 
+    {
         if (Instance != null)
         {
             Destroy(gameObject); //Remove if not null.
             return;
         }
         Instance = this; //sets the instance.
-        Load();
+        Load(); //loads the data
+        Debug.Log("Loading saved data");
         DontDestroyOnLoad(gameObject);
     }
+    public void SetName(string name)
+    {
+        PlayerName = name;
+    }
+    public void SetVolume(float volume)
+    {
+        VolumeSetting = volume;
+    }
+
     [System.Serializable]
     class PlayerSaveData
     {
