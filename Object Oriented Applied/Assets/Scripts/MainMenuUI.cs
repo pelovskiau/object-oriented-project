@@ -1,6 +1,7 @@
-using UnityEngine;
-using TMPro;
 using System.IO;
+using TMPro;
+using UnityEditor;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
@@ -32,10 +33,33 @@ public class MainMenuUI : MonoBehaviour
     {
         
     }
-    void PlayClicked()
+    public void Play()
     {
-        MainPanel.SetActive(false);
+        MainPanel.SetActive(false);//we swap it out to the difficulty options, fairly self explanatory.
         DifficultyPanel.SetActive(true);
+    }
+    public void Difficuly(int difficulty)
+    { 
+        //based on 1-3 it'll set the time difficulty, may want this to pull in data manager as well
+    }
+    public void Options()
+    {
+        MainPanel.SetActive(false);//swaps it out to options
+        OptionsPanel.SetActive(true);
+    }
+    public void Back()
+    { 
+        OptionsPanel.SetActive(false);
+        DifficultyPanel.SetActive(false );
+        MainPanel.SetActive(true );//lazy, no matter what we go back to title on back. because it'll only ever go there.
+    }
+    public void Exit()
+    {
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode(); //QUIT
+#else
+        Application.Quit();
+#endif
     }
 
     // Update is called once per frame
